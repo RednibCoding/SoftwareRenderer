@@ -60,7 +60,6 @@ namespace Retrogen
             mesh = ObjLoader.LoadObj("goblin.obj");
 
             camera.Position = new Vector3(0, 0, 10.0f);
-            camera.Target = Vector3.Zero;
         }
 
         private void onUpdate(float deltaTime)
