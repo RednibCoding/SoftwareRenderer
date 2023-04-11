@@ -31,7 +31,7 @@ namespace Retrogen
         private int width;
         private int height;
         public Color4 ClearColor { get; set; } = new(0, 0, 0, 1.0f);
-        public RenderMode RenderMode { get; set; } = RenderMode.Solid;
+        public RenderMode RenderMode { get; set; } = RenderMode.Textured;
         public ShadingMode ShadingMode { get; set; } = ShadingMode.Smooth;
 
         internal Renderer(IntPtr renderer, IntPtr renderSurface, int width, int height)
