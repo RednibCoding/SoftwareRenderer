@@ -361,7 +361,7 @@ namespace Retrogen
             // Calculate the view matrix using the position, forward, and up vectors
             Matrix viewMatrix = Matrix.LookAtLH(camera.Position, camera.Position + forward, up);
 
-            var projectionMatrix = Matrix.PerspectiveFovLH(0.78f, (float)width / height, 0.01f, 1.0f);
+            var projectionMatrix = Matrix.PerspectiveFovLH(0.78f, (float)width / height, camera.NearClipDistance, camera.FarClipDistance);
 
             if (meshes == null) return;
 

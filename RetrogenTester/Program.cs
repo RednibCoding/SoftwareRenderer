@@ -2,6 +2,7 @@
 using Retrogen.Mathematics;
 using Retrogen.ModelLoaders;
 using SDL2;
+using System.Runtime.InteropServices;
 
 namespace Retrogen
 {
@@ -80,17 +81,29 @@ namespace Retrogen
                 {
                     window.ShouldClose = true;
                 }
-                else if (e.type == SDL.SDL_EventType.SDL_KEYDOWN)
-                {
-                    if (e.key.keysym.sym == SDL.SDL_Keycode.SDLK_a)
-                    {
-                        camera.Rotation -= new Vector3(0, 0.02f * deltaTime, 0);
-                    }
-                    else if (e.key.keysym.sym == SDL.SDL_Keycode.SDLK_d)
-                    {
-                        camera.Rotation += new Vector3(0, 0.02f * deltaTime,  0);
-                    }
-                }
+            }
+
+            // Get the state of the keyboard
+            IntPtr keysPtr = SDL.SDL_GetKeyboardState(out int numkeys);
+            byte[] keys = new byte[numkeys];
+            Marshal.Copy(keysPtr, keys, 0, numkeys);
+
+            // Check if a key is currently being held down and move the camera accordingly
+            if (keys[(int)SDL.SDL_Scancode.SDL_SCANCODE_A] == 1)
+            {
+                camera.Position -= new Vector3(0.01f * deltaTime, 0, 0);
+            }
+            if (keys[(int)SDL.SDL_Scancode.SDL_SCANCODE_D] == 1)
+            {
+                camera.Position += new Vector3(0.01f * deltaTime, 0, 0);
+            }
+            if (keys[(int)SDL.SDL_Scancode.SDL_SCANCODE_W] == 1)
+            {
+                camera.Position -= new Vector3(0, 0, 0.01f * deltaTime);
+            }
+            if (keys[(int)SDL.SDL_Scancode.SDL_SCANCODE_S] == 1)
+            {
+                camera.Position += new Vector3(0, 0, 0.01f * deltaTime);
             }
         }
 
