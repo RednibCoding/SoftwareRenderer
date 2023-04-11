@@ -58,13 +58,16 @@ namespace Retrogen
                 backBuffer[index + 1] = (byte)(ClearColor.Green * 255);
                 backBuffer[index + 2] = (byte)(ClearColor.Blue * 255);
                 backBuffer[index + 3] = (byte)(ClearColor.Alpha * 255);
+
+                // Clearing Depth Buffer
+                depthBuffer[index/4] = float.MaxValue;
             }
 
             // Clearing Depth Buffer
-            for (var index = 0; index < depthBuffer.Length; index++)
-            {
-                depthBuffer[index] = float.MaxValue;
-            }
+            //for (var index = 0; index < depthBuffer.Length; index++)
+            //{
+            //    depthBuffer[index] = float.MaxValue;
+            //}
         }
 
         public void Present()
