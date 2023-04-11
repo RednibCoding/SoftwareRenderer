@@ -81,6 +81,17 @@ namespace Retrogen
                 {
                     window.ShouldClose = true;
                 }
+                else if (e.type == SDL.SDL_EventType.SDL_KEYDOWN)
+                {
+                    if (e.key.keysym.sym == SDL.SDL_Keycode.SDLK_a)
+                    {
+                        camera.Rotation -= new Vector3(0, 0.02f * deltaTime, 0);
+                    }
+                    else if (e.key.keysym.sym == SDL.SDL_Keycode.SDLK_d)
+                    {
+                        camera.Rotation += new Vector3(0, 0.02f * deltaTime,  0);
+                    }
+                }
             }
         }
 

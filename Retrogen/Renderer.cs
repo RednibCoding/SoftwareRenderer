@@ -352,8 +352,15 @@ namespace Retrogen
         // The main method of the engine that re-compute each vertex projection during each frame
         public void Render(Camera camera, params Mesh?[]? meshes)
         {
-            // To understand this part, please read the prerequisites resources
-            var viewMatrix = Matrix.LookAtLH(camera.Position, camera.Target, Vector3.UnitY);
+            Matrix cameraRotationMatrix = Matrix.RotationYawPitchRoll(camera.Rotation.Y, camera.Rotation.X, camera.Rotation.Z);
+
+            // Calculate the forward, up, and right vectors using the rotation matrix
+            Vector3 forward = Vector3.TransformCoordinate(-Vector3.UnitZ, cameraRotationMatrix);
+            Vector3 up = Vector3.TransformCoordinate(Vector3.UnitY, cameraRotationMatrix);
+
+            // Calculate the view matrix using the position, forward, and up vectors
+            Matrix viewMatrix = Matrix.LookAtLH(camera.Position, camera.Position + forward, up);
+
             var projectionMatrix = Matrix.PerspectiveFovLH(0.78f, (float)width / height, 0.01f, 1.0f);
 
             if (meshes == null) return;
